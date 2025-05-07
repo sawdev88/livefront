@@ -3,17 +3,15 @@ import { useGetArticleDetails } from "./useGetArticleDetails";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import type { ArticleType } from "../../../types/ArticleType";
 
-// --- Mock API key ---
 jest.mock("../../../utils/constants", () => ({
   NYT_API_KEY: "test-api-key",
 }));
 
-// --- Helper to wrap hook with fresh QueryClient ---
 const createWrapper = () => {
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
-        retry: false, // no retries in test
+        retry: false,
       },
     },
   });
@@ -22,7 +20,6 @@ const createWrapper = () => {
   );
 };
 
-// --- Reset mocks before each test ---
 beforeEach(() => {
   jest.resetAllMocks();
 });

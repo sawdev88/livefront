@@ -1,8 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 import { NYT_API_KEY } from "../../../utils/constants";
+import { useCallback } from "react";
 
 export const useGetTopNews = () => {
-  const getTopNews = async () => {
+  const getTopNews = useCallback(async () => {
     const section = "technology";
     const response = await fetch(
       `https://api.nytimes.com/svc/topstories/v2/${section}.json?api-key=${NYT_API_KEY}`
@@ -14,7 +15,7 @@ export const useGetTopNews = () => {
 
     const data = await response.json();
     return data.results;
-  };
+  }, []);
 
   const { data, isPending, isError } = useQuery({
     queryKey: ["topNews"],

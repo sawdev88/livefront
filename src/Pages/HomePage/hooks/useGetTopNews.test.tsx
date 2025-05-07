@@ -2,17 +2,15 @@ import { renderHook, waitFor } from "@testing-library/react";
 import { useGetTopNews } from "./useGetTopNews";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
-// --- 1. MOCK API KEY ---
 jest.mock("../../../utils/constants", () => ({
   NYT_API_KEY: "test-api-key",
 }));
 
-// --- 2. FRESH QUERY CLIENT PER TEST ---
 const createWrapper = () => {
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
-        retry: false, // Disable retry for tests so they fail fast
+        retry: false,
       },
     },
   });
@@ -21,7 +19,6 @@ const createWrapper = () => {
   );
 };
 
-// --- 3. RESET FETCH BEFORE EACH ---
 beforeEach(() => {
   jest.resetAllMocks();
 });
@@ -39,7 +36,6 @@ describe("useGetTopNews", () => {
       wrapper: createWrapper(),
     });
 
-    // wait for data to arrive
     await waitFor(() => expect(result.current.data).toEqual(mockNews));
 
     expect(result.current.isPending).toBe(false);
