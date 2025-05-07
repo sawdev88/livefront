@@ -17,8 +17,13 @@ const Tile = ({ news, onArticleClick }: TileProps) => {
       className="p-4 border rounded cursor-pointer hover:border-blue-500 transition-colors duration-200"
     >
       <div className="h-64">
+        {/* news.multimedia[1] is a smaller image, would use a much better image for a fallback on prod :) */}
         <img
-          src={news.multimedia[0]?.url || "https://i.pravatar.cc"} // bad fallback image but better than nothing
+          src={
+            news.multimedia[1]?.url ||
+            news.multimedia[0]?.url ||
+            "https://i.pravatar.cc"
+          }
           alt={`Image ${news.title || "News image"}`}
           className="w-full h-auto rounded max-h-64 object-cover"
         />
