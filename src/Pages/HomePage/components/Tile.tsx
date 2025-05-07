@@ -1,5 +1,6 @@
 import type { NewsType } from "../../../types/NewsType";
 import formatDate from "../../../utils/dateUtils";
+import { memo } from "react";
 
 type TileProps = {
   news: NewsType;
@@ -39,4 +40,4 @@ const Tile = ({ news, onArticleClick }: TileProps) => {
     </div>
   );
 };
-export default Tile;
+export default memo(Tile);
